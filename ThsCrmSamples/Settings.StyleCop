@@ -1,0 +1,149 @@
+<StyleCopSettings Version="105">
+    <Parsers>
+        <Parser ParserId="StyleCop.CSharp.CsParser">
+            <ParserSettings>
+                <CollectionProperty Name="GeneratedFileFilters">
+                    <Value>\.g\.cs$</Value>
+                    <Value>\.generated\.cs$</Value>
+                    <Value>\.g\.i\.cs$</Value>
+                    <Value>\.xaml\.cs$</Value>
+                    <Value>\.aspx\.cs$</Value>
+                    <Value>Form\.cs$</Value>
+                    <Value>Mixin\.cs$</Value>
+                    <Value>SpecFlow_\d*\.cs$</Value>
+                    <Value>SpecFlow_\d*\.feature\.cs$</Value>
+                    <Value>Generation\.cs$</Value>
+                    <Value>Designer\.cs$</Value>
+                    <Value>(\d{15})_(.*)\.cs$</Value>
+                </CollectionProperty>
+            </ParserSettings>
+        </Parser>
+    </Parsers>
+    <Analyzers>
+        <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
+            <Rules>
+                <Rule Name="PropertySummaryDocumentationMustMatchAccessors">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementDocumentationMustBeSpelledCorrectly">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+            <AnalyzerSettings>
+                <StringProperty Name="CompanyName">NEXPLORE AG</StringProperty>
+                <StringProperty Name="Copyright">Copyright (c) NEXPLORE AG</StringProperty>
+                <BooleanProperty Name="IgnorePrivates">True</BooleanProperty>
+                <BooleanProperty Name="IgnoreInternals">True</BooleanProperty>
+            </AnalyzerSettings>
+        </Analyzer>
+        <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
+            <Rules>
+                <Rule Name="ElementMustBeginWithLowerCaseLetter">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ConstFieldNamesMustBeginWithUpperCaseLetter">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldNamesMustNotUseHungarianNotation">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="AccessibleFieldsMustBeginWithUpperCaseLetter">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="StaticReadonlyFieldsMustBeginWithUpperCaseLetter">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldNamesMustNotContainUnderscore">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+            <AnalyzerSettings />
+        </Analyzer>
+        <Analyzer AnalyzerId="StyleCop.CSharp.ReadabilityRules">
+            <Rules>
+                <Rule Name="ClosingParenthesisMustBeOnLineOfLastParameter">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ParameterMustNotSpanMultipleLines">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="SplitParametersMustStartOnLineAfterDeclaration">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ParameterMustFollowComma">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ParametersMustBeOnSameLineOrSeparateLines">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="DoNotUseRegions">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">True</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+            <AnalyzerSettings />
+        </Analyzer>
+        <Analyzer AnalyzerId="StyleCop.CSharp.MaintainabilityRules">
+            <Rules>
+                <Rule Name="FileMayOnlyContainASingleClass">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldsMustBePrivate">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+            <AnalyzerSettings />
+        </Analyzer>
+        <Analyzer AnalyzerId="StyleCop.CSharp.OrderingRules">
+            <Rules>
+                <Rule Name="ElementsMustAppearInTheCorrectOrder">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementsMustBeOrderedByAccess">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+            <AnalyzerSettings />
+        </Analyzer>
+    </Analyzers>
+</StyleCopSettings>

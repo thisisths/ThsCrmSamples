@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ThsCrmSample.Core", "ThsCrmSample.Core\ThsCrmSample.Core.shproj", "{C464501C-35A8-451C-A67D-900AB0F48655}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThsCrmSamples.CrmDevSession1", "ThsCrmSamples.CrmDevSession1\ThsCrmSamples.CrmDevSession1.csproj", "{0B6761CC-3E8C-4FF2-95DC-66C5EA4649AD}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ThsCrmSample.Core\ThsCrmSample.Core.projitems*{0b6761cc-3e8c-4ff2-95dc-66c5ea4649ad}*SharedItemsImports = 4
+		ThsCrmSample.Core\ThsCrmSample.Core.projitems*{c464501c-35a8-451c-a67d-900ab0f48655}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B6761CC-3E8C-4FF2-95DC-66C5EA4649AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6761CC-3E8C-4FF2-95DC-66C5EA4649AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6761CC-3E8C-4FF2-95DC-66C5EA4649AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6761CC-3E8C-4FF2-95DC-66C5EA4649AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
