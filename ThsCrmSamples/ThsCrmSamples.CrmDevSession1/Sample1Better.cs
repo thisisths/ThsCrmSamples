@@ -3,6 +3,7 @@
     using System;
 
     using ThsCrmSamples.Core;
+    using ThsCrmSamples.CrmDevSession1.Exceptions;
     using ThsCrmSamples.CrmDevSession1.Logic;
 
     public class Sample1Better : BasePlugin
@@ -18,9 +19,13 @@
 
             try
             {
-                logic.SetNameToHelloWorldIfNullOrWhitespace(this.TargetEntity.Id, this.TargetEntity.LogicalName);
+                logic.SetNameToHelloWorldIfNullOrWhitespace2(this.TargetEntity.Id, this.TargetEntity.LogicalName);
             }
-            catch (InvalidCastException ex)
+            catch (WrongAttributeTypeException ex)
+            {
+                this.Logger.Error(ex);
+            }
+            catch (BusinessException ex)
             {
                 this.Logger.Error(ex);
                 throw;

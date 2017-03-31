@@ -79,7 +79,7 @@
 
         public IOrganizationService OrganizationService { get; private set; }
 
-        public ILogger Logger { get; private set }
+        public ILogger Logger { get; private set; }
 
         public OrganizationServiceContext OrganizationServiceContext => this.organizationServiceContext.Value;
 

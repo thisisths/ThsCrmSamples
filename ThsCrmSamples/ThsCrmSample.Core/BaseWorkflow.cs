@@ -70,7 +70,7 @@
 
         public ITracingService TracingService { get; private set; }
 
-        public ILogger Logger { get; private set }
+        public ILogger Logger { get; private set; }
 
         public IOrganizationService OrganizationService { get; private set; }
 
