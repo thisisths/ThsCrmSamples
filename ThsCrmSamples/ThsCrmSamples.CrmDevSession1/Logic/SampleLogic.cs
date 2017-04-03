@@ -46,5 +46,31 @@
 
             this.organizationService.Update(entity);
         }
+
+        public void SetAccountNameToContact(Guid contactId, Guid accountId)
+        {
+            var account = this.organizationService.Retrieve("account", accountId, new ColumnSet("name"));
+
+            var contact = new Entity("contact", contactId)
+            {
+                Attributes =
+                {
+                    ["accountName"] = account.Attributes["name"]
+                }
+            };
+            this.organizationService.Update(contact);
+        }
+
+        public void SetAccountNameToContact(Guid contactId, string accountName)
+        {
+            var contact = new Entity("contact", contactId)
+            {
+                Attributes =
+                {
+                    ["accountName"] = accountName
+                }
+            };
+            this.organizationService.Update(contact);
+        }
     }
 }

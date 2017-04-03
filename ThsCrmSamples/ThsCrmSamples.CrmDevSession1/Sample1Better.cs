@@ -25,7 +25,7 @@
             {
                 this.Logger.Error(ex);
             }
-            catch (BusinessException ex)
+            catch (Exception ex)
             {
                 this.Logger.Error(ex);
                 throw;

@@ -72,11 +72,17 @@
   <ItemGroup>
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\WrongAttributeTypeException.cs" />
+    <Compile Include="Logic\Entities.cs" />
+    <Compile Include="Logic\SampleLogic2.cs" />
     <Compile Include="Logic\SampleLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sample1Better.cs" />
     <Compile Include="Sample1Good.cs" />
     <Compile Include="Sample1Bad.cs" />
+    <Compile Include="Sample2Good.cs" />
+    <Compile Include="Sample2Bad.cs" />
+    <Compile Include="Sample3Good.cs" />
+    <Compile Include="Sample3Bad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
