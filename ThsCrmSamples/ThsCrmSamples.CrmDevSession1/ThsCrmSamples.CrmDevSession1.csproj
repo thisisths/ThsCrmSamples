@@ -73,6 +73,8 @@
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\WrongAttributeTypeException.cs" />
     <Compile Include="Logic\Entities.cs" />
+    <Compile Include="Logic\ISampleDataAccess.cs" />
+    <Compile Include="Logic\SampleDataAccess.cs" />
     <Compile Include="Logic\SampleLogic2.cs" />
     <Compile Include="Logic\SampleLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
