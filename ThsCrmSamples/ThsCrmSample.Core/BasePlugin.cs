@@ -11,13 +11,10 @@
 
     public abstract class BasePlugin : IPlugin
     {
-        private Lazy<OrganizationServiceContext> organizationServiceContext;
-
         protected BasePlugin(string unsecureConfiguration, string secureConfiguration)
         {
             this.UnsecureConfiguration = unsecureConfiguration;
             this.SecureConfiguration = secureConfiguration;
-
         }
 
         public virtual void Execute(IServiceProvider serviceProvider)
@@ -25,13 +22,7 @@
             try
             {
                 this.CreateServicesAndContext(serviceProvider);
-
-                if (this.PluginExecutionContext.InputParameters.Contains("Target")
-                    && this.PluginExecutionContext.InputParameters["Target"] is Entity)
-                {
-                    // Obtain the target entity from the input parameters.
-                    this.TargetEntity = (Entity)this.PluginExecutionContext.InputParameters["Target"];
-                }
+                this.CreateEntity();
 
                 // Call Run method (abstract method)
                 this.ExecutePlugin();
@@ -51,7 +42,7 @@
             }
         }
 
-        private void CreateServicesAndContext(IServiceProvider serviceProvider)
+        protected void CreateServicesAndContext(IServiceProvider serviceProvider)
         {
             // Create Plugin-Context
             this.PluginExecutionContext = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
@@ -61,12 +52,21 @@
             // Create Tracing Service
             this.TracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
 
-            this.Logger = new Logger(this.TracingService);
-
             // Create Service and OrgContext
             var factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             this.OrganizationService = factory.CreateOrganizationService(this.PluginExecutionContext.UserId);
-            this.organizationServiceContext = new Lazy<OrganizationServiceContext>(() => new OrganizationServiceContext(this.OrganizationService));
+            this.OrganizationServiceContext = new Lazy<OrganizationServiceContext>(() => new OrganizationServiceContext(this.OrganizationService));
+            this.Logger = new Logger(this.TracingService);
+        }
+
+        protected void CreateEntity()
+        {
+            if (this.PluginExecutionContext.InputParameters.Contains("Target")
+                && this.PluginExecutionContext.InputParameters["Target"] is Entity)
+            {
+                // Obtain the target entity from the input parameters.
+                this.TargetEntity = (Entity)this.PluginExecutionContext.InputParameters["Target"];
+            }
         }
 
         public string UnsecureConfiguration { get; private set; }
@@ -79,11 +79,11 @@
 
         public IOrganizationService OrganizationService { get; private set; }
 
-        public ILogger Logger { get; private set; }
-
-        public OrganizationServiceContext OrganizationServiceContext => this.organizationServiceContext.Value;
+        public Lazy<OrganizationServiceContext> OrganizationServiceContext { get; private set; }
 
         public Entity TargetEntity { get; private set; }
+
+        public ILogger Logger { get; private set; }
 
         /// <summary>
         /// Method for implementing the doing of the plugin.
@@ -91,13 +91,9 @@
         protected abstract void ExecutePlugin();
     }
 
-    public abstract class BasePlugin<TEntity> : BasePlugin
+    public abstract class BasePlugin<TEntity> : BasePlugin, IPlugin
         where TEntity : Entity
     {
-        private Lazy<TEntity> entityLazy;
-
-        private Lazy<TEntity> contextEntityLazy;
-
         protected BasePlugin(string unsecureConfiguration, string secureConfiguration)
             : base(unsecureConfiguration, secureConfiguration)
         {
@@ -108,30 +104,48 @@
         /// </summary>
         public override void Execute(IServiceProvider serviceProvider)
         {
-            this.CreateLazies();
+            try
+            {
+                this.CreateServicesAndContext(serviceProvider);
+                this.CreateEntity();
+                this.CreateLazies();
 
-            // Call Run method (abstract method)
-            base.Execute(serviceProvider);
+                // Call Run method (abstract method)
+                this.ExecutePlugin();
+            }
+            catch (InvalidPluginExecutionException)
+            {
+                //retain original stack trace
+                throw;
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                throw new InvalidPluginExecutionException($"Fehler in Execute während Service-Aufruf: {ex.Message}\n{ex.StackTrace}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidPluginExecutionException($"Fehler in Execute: {ex.Message}\n{ex.StackTrace}", ex);
+            }
         }
 
         private void CreateLazies()
         {
-            this.entityLazy = new Lazy<TEntity>(() =>
+            this.Entity = new Lazy<TEntity>(() =>
             {
-                if (this.PluginExecutionContext.InputParameters.Contains("Target")
-                    && this.PluginExecutionContext.InputParameters["Target"] is TEntity)
+                if (this.TargetEntity != null
+                    && this.TargetEntity is TEntity)
                 {
                     // Obtain the target entity from the input parameters.
-                    return (TEntity)this.PluginExecutionContext.InputParameters["Target"];
+                    return (TEntity)this.TargetEntity;
                 }
                 return null;
             });
 
-            this.contextEntityLazy = new Lazy<TEntity>(() => this.OrganizationServiceContext.CreateQuery<TEntity>().SingleOrDefault(o => o.Id == this.entityLazy.Value.Id));
+            this.ContextEntity = new Lazy<TEntity>(() => this.OrganizationServiceContext.Value.CreateQuery<TEntity>().FirstOrDefault(o => o.Id == this.TargetEntity.Id));
         }
 
-        public TEntity Entity => this.entityLazy.Value;
+        public Lazy<TEntity> Entity { get; private set; }
 
-        public TEntity ContextEntity => this.contextEntityLazy.Value;
+        public Lazy<TEntity> ContextEntity { get; private set; }
     }
 }
