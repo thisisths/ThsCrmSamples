@@ -18,10 +18,20 @@
                 Console.WriteLine("This line will not be written");
             }
 
+            if (!entityWithApprovedFalse.IsApproved.GetValueOrDefault())
+            {
+                Console.WriteLine("But this line will be written");
+            }
+
             var entityWithApprovedNull = new EntityFromService { IsApproved = false };
             if (entityWithApprovedNull.IsApproved.GetValueOrDefault())
             {
                 Console.WriteLine("This line will not be written");
+            }
+
+            if (!entityWithApprovedNull.IsApproved.GetValueOrDefault())
+            {
+                Console.WriteLine("But this line will be written");
             }
         }
 
