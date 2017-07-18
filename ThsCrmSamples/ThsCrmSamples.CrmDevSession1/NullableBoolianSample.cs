@@ -23,7 +23,7 @@
                 Console.WriteLine("But this line will be written");
             }
 
-            var entityWithApprovedNull = new EntityFromService { IsApproved = false };
+            var entityWithApprovedNull = new EntityFromService { IsApproved = null };
             if (entityWithApprovedNull.IsApproved.GetValueOrDefault())
             {
                 Console.WriteLine("This line will not be written");
